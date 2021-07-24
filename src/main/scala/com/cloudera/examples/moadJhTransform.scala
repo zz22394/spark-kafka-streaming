@@ -23,7 +23,6 @@ object moadJhTransform {
       .appName("Transform John Hopkins to Parquet")
       .getOrCreate()
 
-    //val df = spark.read.json("file:///Users/sunile.manjee/Documents/Cloudera/javacode/spark-kafka-streaming/src/main/resources/covidjh.json")
     val df = spark.read.json(sourceFile)
 
 
@@ -36,15 +35,5 @@ object moadJhTransform {
       .withColumnRenamed("Count","type_count")
       .withColumnRenamed("Country Latest","Country_Latest")
       .write.mode(SaveMode.Append).parquet(targetLocation)
-    /*
-   df.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
-      .select(from_json($"value", schema = broadcastSchema.value).as("data"))
-      .select(
-        $"data".getItem("Province").alias("Province")).show(5)
-
-     */
   }
-
-
-
 }
