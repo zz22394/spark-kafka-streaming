@@ -10,13 +10,9 @@ object moadJhTransform {
     val targetLocation = args(1) //ie latest
 
     println("\n*******************************")
-    println("\n*******************************")
-    println("\n**********INPUTS***************")
-    println("\n**********INPUTS***************")
     println("\n**********INPUTS***************")
     println("Source File: " + sourceFile)
     println("Target File Location: " + targetLocation)
-    println("\n*******************************")
     println("\n*******************************")
 
     val spark = SparkSession.builder
@@ -25,9 +21,7 @@ object moadJhTransform {
 
     val df = spark.read.json(sourceFile)
 
-
     df.printSchema()
-
 
     df.select("Country","Province","Date","Type","Count","Difference","Source", "Country Latest", "Latitude", "Longitude")
       .na.drop(Seq("Country"))
